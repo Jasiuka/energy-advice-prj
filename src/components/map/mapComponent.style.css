@@ -1,0 +1,14 @@
+.leaflet-container {
+}
+
+.remove-marker {
+  background-color: var(--red);
+  padding: 0.4rem;
+  color: var(--light-grey);
+  border-radius: var(--common-border-radius);
+  transition: var(--main-transition);
+}
+
+.remove-marker:hover {
+  background-color: var(--red-light);
+}

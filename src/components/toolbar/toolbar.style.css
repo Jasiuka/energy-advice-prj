@@ -1,0 +1,88 @@
+/* TOOLBAR MAIN */
+.nav {
+  display: flex;
+  align-items: center;
+  padding: var(--pd-small) var(--pd-medium);
+}
+
+.parameters {
+  display: flex;
+  align-items: center;
+  gap: var(--gap-small);
+}
+
+/* TOGGLE COMPONENT/PARAMETER CONTROL */
+
+.parameter-control > label {
+  user-select: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.param-label {
+}
+
+.control-input {
+  display: none;
+}
+
+.control-input:checked + label .toggle-wrapper {
+  background-color: var(--green);
+}
+
+.control-input:checked + label .toggle-wrapper .circle {
+  left: 4%;
+}
+
+.toggle-wrapper {
+  position: relative;
+  max-width: 2.6rem;
+  min-width: 2.6rem;
+  height: 1.6rem;
+  display: flex;
+  align-items: center;
+  background-color: var(--red);
+  border-radius: 500px;
+  box-shadow: 0px 3px 14px -3px rgba(0, 0, 0, 0.1);
+}
+
+.toggle-wrapper .circle {
+  position: absolute;
+  border-radius: 50%;
+  height: 1.3rem;
+  aspect-ratio: 1;
+  background-color: var(--light-grey);
+  left: calc(96% - 1.3rem);
+  transition: var(--main-transition);
+  cursor: pointer;
+}
+
+/* DATE CONTROL */
+
+.date-control_wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: calc(var(--gap-smallest) - 0.4rem);
+}
+
+.date-control {
+  display: flex;
+  align-items: center;
+  gap: calc(var(--gap-smallest) - 0.6rem);
+}
+
+.date-control > label {
+  flex: 1;
+}
+
+.button-update {
+  background-color: var(--main-cl);
+  border-radius: var(--common-border-radius);
+  transition: var(--main-transition);
+}
+
+.button-update:hover {
+  background-color: var(--main-cl-dark);
+}

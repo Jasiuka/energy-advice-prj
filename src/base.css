@@ -1,0 +1,167 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap");
+:root {
+  /* PADDINGS */
+  --pd-smallest: 0.5rem;
+  --pd-small: 1rem;
+  --pd-medium: 2rem;
+  --pd-large: 2.5rem;
+  --pd-largest: 3.5rem;
+  /* FONT SIZES */
+  --fs-heading-small: clamp(3rem, 10dvw, 4rem);
+  --fs-heading-medium: clamp(4rem, 10dvw, 5rem);
+  --fs-heading-large: clamp(5rem, 10dvw, 6rem);
+
+  --fs-text-smallest: 1rem;
+  --fs-text-small: 1.5rem;
+  --fs-text-medium: 2rem;
+  --fs-text-large: 2.5rem;
+  --fs-text-largest: 3rem;
+  /* GAPS */
+  --gap-smallest: 1rem;
+  --gap-small: 1.5rem;
+  --gap-medium: 2.5rem;
+  --gap-large: 3.5rem;
+  --gap-largest: 5rem;
+
+  /* COLORS */
+  --main-cl: #e9fac8;
+  --main-cl-dark: #c0eb75;
+  --dark-grey: #212529;
+  --light-grey: #e9ecef;
+  --white: #fff;
+  --red: #ff6b6b;
+  --red-light: #ff8787;
+  --green: #69db7c;;
+  /* TRANSITION */
+  --main-transition: all 0.3s ease;
+  /* ICONS */
+  --icon-smallest: 1.5rem;
+  --icon-small: 2.5rem;
+  --icon-medium: 3.5rem;
+  --icon-large: 4.5rem;
+  --icon-largest: 6rem;
+  /* OTHERS */
+  --common-border-radius: 4px;
+  --box-shadow-more-vertical: box-shadow: 0px 5px 13px -3px rgba(0,0,0,0.1);
+}
+
+/* /DEFAULT/ */
+/* Box sizing rules */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+*:link,
+*:visited {
+  text-decoration: none;
+}
+
+/* Prevent font size inflation */
+html {
+  -moz-text-size-adjust: none;
+  -webkit-text-size-adjust: none;
+  text-size-adjust: none;
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+}
+
+ul {
+  list-style: none;
+}
+
+/* Remove default margin in favour of better control in authored CSS */
+body,
+h1,
+h2,
+h3,
+h4,
+p,
+figure,
+blockquote,
+dl,
+dd {
+  margin: 0;
+}
+
+/* Remove list styles on ul, ol elements with a list role, which suggests default styling will be removed */
+ul[role="list"],
+ol[role="list"] {
+  list-style: none;
+}
+
+/* Set core body defaults */
+body {
+  min-height: 100vh;
+  line-height: 1.5;
+  font-weight: 400;
+  font-family: "Montserrat", "Sans-serif";
+  background-color: #e9ecef;
+  font-size: var(--font-sm);
+  color: var(--dark-grey);
+  overflow-x: hidden;
+}
+
+/* Set shorter line heights on headings and interactive elements */
+h1,
+h2,
+h3,
+h4,
+button,
+input,
+label {
+  line-height: 1.1;
+}
+
+/* Balance text wrapping on headings */
+h1,
+h2,
+h3,
+h4 {
+  text-wrap: balance;
+}
+
+/* A elements that don't have a class get default styles */
+a:not([class]) {
+  text-decoration-skip-ink: auto;
+  color: currentColor;
+}
+
+/* Make images easier to work with */
+img,
+picture {
+  max-width: 100%;
+  display: block;
+}
+
+/* Inherit fonts for inputs and buttons */
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+
+/* Make sure textareas without a rows attribute are not tiny */
+textarea:not([rows]) {
+  min-height: 10em;
+}
+
+/* Anything that has been anchored to should have extra scroll margin */
+:target {
+  scroll-margin-block: 5ex;
+}
+
+/*  */
+
+#root {
+  overflow-x: hidden;
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  background-color: transparent;
+  padding: 0;
+}
