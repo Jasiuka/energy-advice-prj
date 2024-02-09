@@ -34,7 +34,6 @@ const MapComponent = ({ center }) => {
   const [markers, setMarkers] = useAtom(markersAtom);
   const [date] = useAtom(datesAtom);
   const { fetchData } = useFetch();
-  const mapRef = useRef(null);
 
   const addNewMarker = async (coords) => {
     const apiResponse = await fetchData({
@@ -53,9 +52,6 @@ const MapComponent = ({ center }) => {
     }
 
     setMarkers([...markers, marker]);
-    // Fetch weather data of marker
-
-    console.log(apiResponse);
   };
 
   const removeMarker = (id) => {
@@ -67,7 +63,6 @@ const MapComponent = ({ center }) => {
     <MapContainer
       center={[center.latitude, center.longitude]}
       zoom={10}
-      ref={mapRef}
       style={{ height: "30dvh", width: "100dvw" }}
     >
       <MapEvent addNewMarker={addNewMarker} />

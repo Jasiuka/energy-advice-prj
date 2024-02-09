@@ -1,0 +1,36 @@
+/* LIST */
+.notifications-list {
+  position: fixed;
+  top: 10%;
+  left: 80%;
+  z-index: 500;
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-smallest);
+}
+/* COMPONENT */
+
+.notification {
+  display: flex;
+  padding: 0.2rem var(--pd-smallest);
+  color: var(--light-grey);
+  border-radius: var(--common-border-radius);
+  gap: var(--gap-smallest);
+  font-size: var(--fs-text-small);
+  align-items: center;
+}
+
+.notification button {
+  color: var(--light-grey);
+  flex: 1;
+  text-align: start;
+  transition: var(--main-transition);
+}
+
+.notification button:hover {
+  color: var(--dark-grey);
+}
+
+.notification-error {
+  background-color: var(--red);
+}

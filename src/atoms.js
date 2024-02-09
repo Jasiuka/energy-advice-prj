@@ -1,5 +1,7 @@
-import { atom } from "jotai";
-
+import { atom, createStore } from "jotai";
+// SIMPLE JOTAI STORE
+let timer = null;
+export const jotaiStore = createStore();
 export const parametersAtom = atom([
   {
     show: true,
@@ -39,3 +41,45 @@ export const parametersAtom = atom([
 ]);
 export const markersAtom = atom([]);
 export const datesAtom = atom([]);
+export const notificationsAtom = atom([]);
+
+export const createNotification = (notification) => {
+  notification.id = Date.now() + Math.random();
+
+  jotaiStore.set(notificationsAtom, [
+    ...jotaiStore.get(notificationsAtom),
+    notification,
+  ]);
+
+  if (timer) {
+    clearInterval(timer);
+    timer = null;
+  }
+
+  if (!timer) {
+    timer = setInterval(() => {
+      removeFirstNotification();
+    }, 2000);
+  }
+};
+
+export const removeFirstNotification = () => {
+  const newNotifications = jotaiStore.get(notificationsAtom).slice(1);
+  jotaiStore.set(notificationsAtom, newNotifications);
+  const notifications = jotaiStore.get(notificationsAtom);
+  if (notifications.length === 0) {
+    clearInterval(timer);
+    timer = null;
+  }
+};
+
+export const removeNotificationWithClick = (notificationId) => {
+  const notifications = jotaiStore.get(notificationsAtom);
+  const notificationIndex = notifications.findIndex(
+    (notification) => notification.id === notificationId
+  );
+  const newNotifications = notifications.filter(
+    (notification) => notification.id !== notificationId
+  );
+  jotaiStore.set(notificationsAtom, newNotifications);
+};

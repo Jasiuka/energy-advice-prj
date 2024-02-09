@@ -1,8 +1,27 @@
 /* TOOLBAR MAIN */
+
+.header {
+  position: fixed;
+  top: 0;
+  z-index: 1001;
+  width: 100dvw;
+  box-shadow: 0px 3px 11px 0px rgba(0, 0, 0, 0.1);
+}
+
 .nav {
+  background-color: #e9ecef9e;
   display: flex;
   align-items: center;
   padding: var(--pd-small) var(--pd-medium);
+  z-index: 500;
+  height: 10rem;
+}
+
+@supports (backdrop-filter: blur()) {
+  .nav {
+    backdrop-filter: blur(3px);
+    -webkit-backdrop-filter: blur(3px);
+  }
 }
 
 .parameters {
@@ -84,11 +103,13 @@
 }
 
 .button-update {
-  background-color: var(--main-cl);
+  background-color: var(--light-grey);
   border-radius: var(--common-border-radius);
   transition: var(--main-transition);
+  border: 2px solid var(--dark-grey);
 }
 
 .button-update:hover {
-  background-color: var(--main-cl-dark);
+  background-color: var(--dark-grey);
+  color: var(--light-grey);
 }

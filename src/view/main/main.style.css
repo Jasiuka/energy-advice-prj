@@ -1,0 +1,12 @@
+.main {
+  margin-top: 10rem;
+}
+.charts {
+  padding: var(--pd-small) var(--pd-medium);
+}
+
+.date-range-title {
+  text-align: center;
+  margin-top: var(--gap-small);
+  text-transform: uppercase;
+}

@@ -37,6 +37,13 @@ export const ChangeDateFormat = (dateToChange) => {
   return fixedDate.slice(5, -1);
 };
 
+export const isDateOlder = (startDateStr, endDateStr) => {
+  const startDate = new Date(startDateStr).getTime();
+  const endDate = new Date(endDateStr).getTime();
+
+  return startDate > endDate;
+};
+
 export const createChartData = (data, parameters) => {
   const dates = [].concat(...data.hourly.time);
   const labels = dates.map((date) => ChangeDateFormat(date));
@@ -62,7 +69,6 @@ export const createChartData = (data, parameters) => {
     datasets,
   };
 
-  console.log(chartData);
   return chartData;
 };
 
@@ -81,3 +87,36 @@ export const CHART_COLORS = [
   "rgb(139,  69,  19)", // Brown
   "rgb(255,  192,  203)", // Pink
 ];
+
+export const getFromLocal = (name) => {
+  const data = localStorage.getItem(name);
+  if (!data) return null;
+
+  return JSON.parse(data);
+};
+
+export const fetchMultipleMarkers = async (
+  markers,
+  parameters,
+  start_date,
+  end_date,
+  fetchFunction
+) => {
+  const newMarkers = await Promise.all(
+    markers.map(async (marker) => {
+      const options = {
+        coords: {
+          lat: marker.lat,
+          lng: marker.lng,
+        },
+        parameters,
+        date: [start_date, end_date],
+      };
+      const apiResponse = await fetchFunction(options);
+      if (apiResponse.status === 200) {
+        return { ...marker, data: apiResponse.data };
+      }
+    })
+  );
+  return newMarkers;
+};
