@@ -9,4 +9,5 @@
   text-align: center;
   margin-top: var(--gap-small);
   text-transform: uppercase;
+  font-size: clamp(var(--fs-text-smallest), 3vw, var(--fs-text-medium));
 }

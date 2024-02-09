@@ -1,6 +1,6 @@
 import "./toolbar.style.css";
 import ParameterToggleComponent from "./parameterToggleComponent";
-import { useState, useEffect, useMemo } from "react";
+import { useState, useMemo } from "react";
 import PropTypes from "prop-types";
 import { useAtom } from "jotai";
 import { parametersAtom, datesAtom, markersAtom } from "../../atoms";
@@ -8,11 +8,14 @@ import { calculateDate } from "../../utils/helper";
 import { createNotification } from "../../atoms";
 import { isDateOlder, fetchMultipleMarkers } from "../../utils/helper";
 import { useFetch } from "../../utils/hooks/useFetch";
+import MenuIcon from "../icons/menu.icon";
+import CloseIcon from "../icons/close.icon";
 
 const ToolbarComponent = () => {
   const [parameters, setParameters] = useAtom(parametersAtom);
   const [dates, setDates] = useAtom(datesAtom);
   const [markers, setMarkers] = useAtom(markersAtom);
+  const [menuVisible, setMenuVisible] = useState(false);
   const { fetchData } = useFetch();
 
   const toggleParam = (paramName) => {
@@ -25,6 +28,10 @@ const ToolbarComponent = () => {
     });
 
     setParameters(newParams);
+  };
+
+  const handleMenuToggle = () => {
+    setMenuVisible((prev) => !prev);
   };
 
   const handleDateSubmit = async (e) => {
@@ -89,12 +96,24 @@ const ToolbarComponent = () => {
     <nav className="nav">
       <form className="date-control_wrapper" onSubmit={handleDateSubmit}>
         <div className="date-control">
-          <input type="date" name="start_date" min={minDate} max={maxDate} />
-          <label>Nuo</label>
+          <input
+            type="date"
+            name="start_date"
+            min={minDate}
+            max={maxDate}
+            id="start_date"
+          />
+          <label htmlFor="start_date">Nuo</label>
         </div>
         <div className="date-control">
-          <input type="date" name="end_date" min={minDate} max={maxDate} />
-          <label>Iki</label>
+          <input
+            type="date"
+            name="end_date"
+            min={minDate}
+            max={maxDate}
+            id="end_date"
+          />
+          <label htmlFor="end_date">Iki</label>
         </div>
         <button
           role="button"
@@ -105,7 +124,21 @@ const ToolbarComponent = () => {
           Atnaujinti
         </button>
       </form>
-      <ul className="parameters">
+      <button
+        className="mobile-button"
+        onClick={() => handleMenuToggle()}
+        role="button"
+        title={menuVisible ? "Uždaryti meniu" : "Atidaryti meniu"}
+      >
+        {!menuVisible ? (
+          <MenuIcon customClass={"menu-icon"} />
+        ) : (
+          <CloseIcon customClass={"menu-icon"} />
+        )}
+      </button>
+      <ul
+        className={`parameters navigation-list ${menuVisible ? "" : "hidden"}`}
+      >
         {parameters.map((param) => {
           return (
             <li key={param.name}>
@@ -118,6 +151,9 @@ const ToolbarComponent = () => {
             </li>
           );
         })}
+        <li className="button-login__wrapper">
+          <button className="button-login">Prisijungti</button>
+        </li>
       </ul>
     </nav>
   );

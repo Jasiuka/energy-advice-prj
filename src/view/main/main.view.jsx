@@ -1,14 +1,14 @@
 import "./main.style.css";
 import MapComponent from "../../components/map/mapComponent.jsx";
 import ToolbarComponent from "../../components/toolbar/toolbarComponent.jsx";
-import { useEffect, useState } from "react";
-import { useFetch } from "../../utils/hooks/useFetch.jsx";
+import { useEffect } from "react";
 import { useAtom } from "jotai";
 import { datesAtom, markersAtom, parametersAtom } from "../../atoms.js";
-import { createChartData, getAllDaysInRange } from "../../utils/helper.js";
+import { createChartData } from "../../utils/helper.js";
 import NotificationsList from "../../components/notifications/notificationsList.jsx";
 // CHART
 import ChartComponent from "../../components/chart/chartComponent.jsx";
+// eslint-disable-next-line no-unused-vars
 import { Chart as ChartJS } from "chart.js/auto";
 const MainView = () => {
   const centerCoord = {
