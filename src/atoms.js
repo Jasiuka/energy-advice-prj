@@ -41,18 +41,7 @@ export const parametersAtom = atom([
 ]);
 export const markersAtom = atom([]);
 export const datesAtom = atom([]);
-export const notificationsAtom = atom([
-  {
-    text: "Klaida, netinkamas datos formatas arba nėra datos",
-    type: "error",
-    id: 55,
-  },
-  {
-    text: "Klaida, netinkamas datos formatas arba nėra datoss dfsfsdfsd fsdfsdfsdf",
-    type: "error",
-    id: 5555,
-  },
-]);
+export const notificationsAtom = atom([]);
 
 export const createNotification = (notification) => {
   notification.id = Date.now() + Math.random();
