@@ -5,6 +5,7 @@ import {
   useMapEvent,
   Marker,
   Popup,
+  Tooltip,
 } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import PropTypes from "prop-types";
@@ -20,7 +21,7 @@ const MapEvent = ({ addNewMarker }) => {
       const coords = {
         lat: e.latlng.lat,
         lng: e.latlng.lng,
-        id: new Date().toISOString(),
+        id: Date.now() + Math.random(),
       };
 
       addNewMarker(coords);
@@ -34,18 +35,26 @@ const MapComponent = ({ center }) => {
   const [date] = useAtom(datesAtom);
   const { fetchData } = useFetch();
   const mapRef = useRef(null);
-  // const [markers, setMarkers] = useState([]);
 
   const addNewMarker = async (coords) => {
-    setMarkers([
-      ...markers,
-      { lat: coords.lat, lng: coords.lng, id: coords.id },
-    ]);
     const apiResponse = await fetchData({
       parameters,
       coords,
       date,
     });
+    const marker = { lat: coords.lat, lng: coords.lng, id: coords.id };
+    if (apiResponse.status === 200) {
+      // If date is chosen, set weather data to that marker
+      if (date.length) {
+        marker.data = apiResponse.data;
+      } else {
+        marker.data = null;
+      }
+    }
+
+    setMarkers([...markers, marker]);
+    // Fetch weather data of marker
+
     console.log(apiResponse);
   };
 
@@ -66,7 +75,7 @@ const MapComponent = ({ center }) => {
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
       />
-      {markers.map((marker) => {
+      {markers.map((marker, index) => {
         return (
           <Marker
             key={marker.id}
@@ -74,15 +83,23 @@ const MapComponent = ({ center }) => {
             bubblingMouseEvents={false}
           >
             <Popup>
-              <button
-                role="button"
-                title="Panaikinti"
-                className="remove-marker"
-                onClick={() => removeMarker(marker.id)}
-              >
-                Panaikinti žymeklį
-              </button>
+              <div className="popup-content">
+                <span>
+                  {marker.lat.toFixed(4)} {marker.lng.toFixed(4)}
+                </span>
+                <button
+                  role="button"
+                  title="Panaikinti"
+                  className="remove-marker"
+                  onClick={() => removeMarker(marker.id)}
+                >
+                  Panaikinti žymeklį
+                </button>
+              </div>
             </Popup>
+            <Tooltip permanent={true} direction="bottom">
+              <h4>{index + 1}</h4>
+            </Tooltip>
           </Marker>
         );
       })}

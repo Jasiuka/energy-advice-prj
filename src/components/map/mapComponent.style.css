@@ -12,3 +12,10 @@
 .remove-marker:hover {
   background-color: var(--red-light);
 }
+
+.popup-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.2rem;
+}

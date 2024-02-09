@@ -3,7 +3,7 @@ import { useState } from "react";
 export function useFetch() {
   const api_server = axios.create({ baseURL: WEATHER_API });
   const createUrl = (coords, parameters, date) => {
-    let newUrl = `forecast?latitude=${coords.lat}&longitude=${coords.lng}&daily=`;
+    let newUrl = `forecast?latitude=${coords.lat}&longitude=${coords.lng}&hourly=`;
     const paramString = parameters.reduce((acc, param) => {
       if (param.show) {
         param.api_name.forEach((name) => {

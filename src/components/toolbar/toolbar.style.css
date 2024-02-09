@@ -6,7 +6,10 @@
 }
 
 .parameters {
-  display: flex;
+  margin-left: var(--gap-medium);
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: minmax(0, 1fr);
   align-items: center;
   gap: var(--gap-small);
 }
@@ -17,11 +20,8 @@
   user-select: none;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: baseline;
   gap: 0.3rem;
-}
-
-.param-label {
 }
 
 .control-input {
@@ -75,6 +75,12 @@
 
 .date-control > label {
   flex: 1;
+}
+
+.date-control > input {
+  border: none;
+  border-radius: var(--common-border-radius);
+  padding: 0.2rem 0.4rem;
 }
 
 .button-update {

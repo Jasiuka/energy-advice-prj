@@ -27,8 +27,8 @@ const ToolbarComponent = () => {
     const dateForm = e.target;
     setDates([dateForm.start_date.value, dateForm.end_date.value]);
   };
-  const minDate = useMemo(() => calculateDate(-3), []);
-  const maxDate = useMemo(() => calculateDate(3), []);
+  const minDate = useMemo(() => calculateDate(-89), []);
+  const maxDate = useMemo(() => calculateDate(16), []);
 
   return (
     <nav className="nav">
