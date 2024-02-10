@@ -57,7 +57,7 @@ export const createChartData = (data, parameters) => {
           data: [].concat(...data.hourly[key]),
           borderColor: CHART_COLORS[foundParam.id - 1],
           backgroundColor: CHART_COLORS[foundParam.id - 1],
-          yAxisID: `y${index + 1}`,
+          yAxisID: `y${index}`,
         };
         datasets.push(dataset);
       }

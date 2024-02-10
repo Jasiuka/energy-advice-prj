@@ -1,0 +1,70 @@
+.login {
+  width: 100dvw;
+  height: 100dvh;
+  background-color: rgba(50, 50, 50, 0.682);
+  position: fixed;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  z-index: 1150;
+  color: var(--light-grey);
+  gap: var(--gap-large);
+}
+
+.login > form,
+.login > form > .form-control {
+  display: flex;
+  flex-direction: column;
+}
+
+.login > form {
+  gap: var(--gap-small);
+}
+
+.login > form > .form-control {
+  align-items: baseline;
+  gap: 0.2rem;
+}
+
+.login input {
+  border-radius: var(--common-border-radius);
+}
+
+.login input,
+.login label {
+  font-size: var(--fs-text-small);
+}
+
+@supports (backdrop-filter: blur()) {
+  .login {
+    backdrop-filter: blur(30px);
+    -webkit-backdrop-filter: blur(30px);
+  }
+}
+
+.login-close {
+  position: absolute;
+  top: 30%;
+  left: 60%;
+  font-size: var(--fs-text-small);
+  padding: var(--pd-smallest);
+}
+
+.login-close:hover {
+  transform: scale(0.95);
+}
+
+.login-submit:hover {
+  transform: scale(1.05);
+}
+
+.login-info {
+  font-size: calc(var(--fs-text-small) - 0.2rem);
+  padding: var(--pd-smallest) var(--pd-small);
+  background-color: var(--red);
+  border-radius: var(--common-border-radius);
+  text-wrap: balance;
+  text-align: center;
+  width: fit-content;
+}

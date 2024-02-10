@@ -21,7 +21,7 @@
     overflow-x: scroll;
   }
   .chart-container canvas {
-    min-width: 150dvw;
-    max-height: 50dvh;
+    min-width: 300dvw;
+    max-height: 60dvh;
   }
 }

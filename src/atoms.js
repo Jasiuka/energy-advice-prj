@@ -42,6 +42,7 @@ export const parametersAtom = atom([
 export const markersAtom = atom([]);
 export const datesAtom = atom([]);
 export const notificationsAtom = atom([]);
+export const authAtom = atom(null);
 
 export const createNotification = (notification) => {
   notification.id = Date.now() + Math.random();

@@ -1,18 +1,41 @@
 import "./base.css";
 import MainView from "./view/main/main.view";
 import { getFromLocal, fetchMultipleMarkers } from "./utils/helper";
-import { markersAtom, datesAtom, parametersAtom, jotaiStore } from "./atoms";
+import {
+  markersAtom,
+  datesAtom,
+  parametersAtom,
+  jotaiStore,
+  authAtom,
+} from "./atoms";
 import { useAtom } from "jotai";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useFetch } from "./utils/hooks/useFetch";
+import Spinner from "./components/spinner";
 function App() {
   const { fetchData } = useFetch();
   const [parameters] = useAtom(parametersAtom);
+  const [_, setAuth] = useAtom(authAtom);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Get and update data if saved in local
+    // try to login
 
-    (async function () {
+    async function authenticate() {
+      const reponse = await fetch("api/v1/login", {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      const responseData = await reponse.json();
+      if (reponse.status === 200 && responseData.user) {
+        setAuth(responseData.user);
+      }
+    }
+
+    // Get and update data if saved in local
+    async function getData() {
       const savedData = getFromLocal("savedData");
       if (savedData) {
         const { parameters: savedParams, date, markers } = savedData;
@@ -34,14 +57,22 @@ function App() {
         jotaiStore.set(parametersAtom, newParams);
         jotaiStore.set(datesAtom, [date.start_date, date.end_date]);
       }
-    })();
+    }
+
+    const handleAllAsync = async () => {
+      try {
+        await Promise.all([authenticate(), getData()]);
+      } catch (error) {
+        return null;
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    handleAllAsync();
   }, []);
 
-  return (
-    <>
-      <MainView />
-    </>
-  );
+  return <>{loading ? <Spinner /> : <MainView />}</>;
 }
 
 export default App;

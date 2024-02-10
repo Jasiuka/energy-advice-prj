@@ -81,12 +81,12 @@
   cursor: pointer;
 }
 
-.button-login__wrapper {
+.button-logout__wrapper {
   margin-left: auto;
   margin-right: 0;
 }
 
-.button-login {
+.button-logout {
   padding: var(--pd-smallest);
 }
 
@@ -177,11 +177,11 @@
     gap: 0.3rem;
   }
 
-  .button-login__wrapper {
+  .button-logout__wrapper {
     margin: 0;
   }
 
-  .button-login {
+  .button-logout {
     min-width: 100%;
   }
 }

@@ -3,7 +3,7 @@ import ParameterToggleComponent from "./parameterToggleComponent";
 import { useState, useMemo } from "react";
 import PropTypes from "prop-types";
 import { useAtom } from "jotai";
-import { parametersAtom, datesAtom, markersAtom } from "../../atoms";
+import { parametersAtom, datesAtom, markersAtom, authAtom } from "../../atoms";
 import { calculateDate } from "../../utils/helper";
 import { createNotification } from "../../atoms";
 import { isDateOlder, fetchMultipleMarkers } from "../../utils/helper";
@@ -12,10 +12,11 @@ import MenuIcon from "../icons/menu.icon";
 import CloseIcon from "../icons/close.icon";
 import CustomButton from "../customButton";
 
-const ToolbarComponent = () => {
+const ToolbarComponent = ({ user }) => {
   const [parameters, setParameters] = useAtom(parametersAtom);
   const [dates, setDates] = useAtom(datesAtom);
   const [markers, setMarkers] = useAtom(markersAtom);
+  const [_, setAuth] = useAtom(authAtom);
   const [menuVisible, setMenuVisible] = useState(false);
   const { fetchData } = useFetch();
 
@@ -33,6 +34,11 @@ const ToolbarComponent = () => {
 
   const handleMenuToggle = () => {
     setMenuVisible((prev) => !prev);
+  };
+
+  const handleLogout = async () => {
+    await fetch("api/v1/logout", { method: "GET" });
+    setAuth(null);
   };
 
   const handleDateSubmit = async (e) => {
@@ -151,20 +157,25 @@ const ToolbarComponent = () => {
             </li>
           );
         })}
-        <li className="button-login__wrapper">
-          <CustomButton
-            role="button"
-            title="Prisijungti"
-            customClass={"button-login"}
-            text={"Prisijungti"}
-          />
-        </li>
+        {user ? (
+          ""
+        ) : (
+          <li className="button-logout__wrapper">
+            <CustomButton
+              role="button"
+              title="Atsijungti"
+              customClass={"button-logout"}
+              text={"Atsijungti"}
+              handleClick={handleLogout}
+            />
+          </li>
+        )}
       </ul>
     </nav>
   );
 };
 
 ToolbarComponent.propTypes = {
-  sendParameters: PropTypes.func,
+  user: PropTypes.object,
 };
 export default ToolbarComponent;

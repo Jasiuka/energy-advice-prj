@@ -1,4 +1,3 @@
-import { useEffect, useRef, useState } from "react";
 import {
   MapContainer,
   TileLayer,
@@ -56,6 +55,10 @@ const MapComponent = ({ center }) => {
 
   const removeMarker = (id) => {
     const newMarkers = markers.filter((marker) => marker.id !== id);
+    // no markers left, clear saved data
+    if (!newMarkers.length) {
+      localStorage.removeItem("savedData");
+    }
     setMarkers(newMarkers);
   };
 

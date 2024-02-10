@@ -7,10 +7,6 @@
   --pd-large: 2.5rem;
   --pd-largest: 3.5rem;
   /* FONT SIZES */
-  --fs-heading-small: clamp(3rem, 10dvw, 4rem);
-  --fs-heading-medium: clamp(4rem, 10dvw, 5rem);
-  --fs-heading-large: clamp(5rem, 10dvw, 6rem);
-
   --fs-text-smallest: 1rem;
   --fs-text-small: 1.5rem;
   --fs-text-medium: 2rem;
@@ -24,25 +20,15 @@
   --gap-largest: 5rem;
 
   /* COLORS */
-  --main-cl: #e9fac8;
-  --main-cl-dark: #c0eb75;
   --dark-grey: #212529;
   --light-grey: #e9ecef;
-  --white: #fff;
   --red: #ff6b6b;
   --red-light: #ff8787;
-  --green: #69db7c;;
+  --green: #69db7c;
   /* TRANSITION */
   --main-transition: all 0.3s ease;
-  /* ICONS */
-  --icon-smallest: 1.5rem;
-  --icon-small: 2.5rem;
-  --icon-medium: 3.5rem;
-  --icon-large: 4.5rem;
-  --icon-largest: 6rem;
   /* OTHERS */
   --common-border-radius: 4px;
-  --box-shadow-more-vertical: box-shadow: 0px 5px 13px -3px rgba(0,0,0,0.1);
 }
 
 /* /DEFAULT/ */
@@ -166,14 +152,13 @@ button {
   padding: 0;
 }
 
-
 /* COMMON */
 
 .btn {
   background-color: #fff;
   border: 1px solid #d5d9d9;
   border-radius: var(--common-border-radius);
-  box-shadow: rgba(213, 217, 217, .5) 0 2px 5px 0;
+  box-shadow: rgba(213, 217, 217, 0.5) 0 2px 5px 0;
   box-sizing: border-box;
   color: #0f1111;
   cursor: pointer;
@@ -195,6 +180,30 @@ button {
 
 .btn:focus {
   border-color: #008296;
-  box-shadow: rgba(213, 217, 217, .5) 0 2px 5px 0;
+  box-shadow: rgba(213, 217, 217, 0.5) 0 2px 5px 0;
   outline: 0;
+}
+
+.loader {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 3rem;
+  height: 3rem;
+  border: 5px solid var(--dark-grey);
+  border-bottom-color: transparent;
+  border-radius: 50%;
+  display: inline-block;
+  box-sizing: border-box;
+  animation: rotation 1s linear infinite;
+}
+
+@keyframes rotation {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
