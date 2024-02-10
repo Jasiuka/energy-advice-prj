@@ -10,6 +10,7 @@ import { isDateOlder, fetchMultipleMarkers } from "../../utils/helper";
 import { useFetch } from "../../utils/hooks/useFetch";
 import MenuIcon from "../icons/menu.icon";
 import CloseIcon from "../icons/close.icon";
+import CustomButton from "../customButton";
 
 const ToolbarComponent = () => {
   const [parameters, setParameters] = useAtom(parametersAtom);
@@ -115,27 +116,26 @@ const ToolbarComponent = () => {
           />
           <label htmlFor="end_date">Iki</label>
         </div>
-        <button
+        <CustomButton
           role="button"
           title="Atnaujinti datą"
           type="submit"
-          className="button-update"
-        >
-          Atnaujinti
-        </button>
-      </form>
-      <button
-        className="mobile-button"
-        onClick={() => handleMenuToggle()}
-        role="button"
+          customClass="button-update"
+          text={"Atnaujinti"}
+        />
+      </form>{" "}
+      <CustomButton
+        customClass={"mobile-button"}
+        handleClick={handleMenuToggle}
         title={menuVisible ? "Uždaryti meniu" : "Atidaryti meniu"}
-      >
-        {!menuVisible ? (
-          <MenuIcon customClass={"menu-icon"} />
-        ) : (
-          <CloseIcon customClass={"menu-icon"} />
-        )}
-      </button>
+        text={
+          !menuVisible ? (
+            <MenuIcon customClass={"menu-icon"} />
+          ) : (
+            <CloseIcon customClass={"menu-icon"} />
+          )
+        }
+      />
       <ul
         className={`parameters navigation-list ${menuVisible ? "" : "hidden"}`}
       >
@@ -152,7 +152,12 @@ const ToolbarComponent = () => {
           );
         })}
         <li className="button-login__wrapper">
-          <button className="button-login">Prisijungti</button>
+          <CustomButton
+            role="button"
+            title="Prisijungti"
+            customClass={"button-login"}
+            text={"Prisijungti"}
+          />
         </li>
       </ul>
     </nav>

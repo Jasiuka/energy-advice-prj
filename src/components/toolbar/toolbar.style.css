@@ -29,10 +29,11 @@
   display: flex;
   align-items: center;
   width: 100%;
+  /* gap: var(--gap-medium); */
 }
 
 .parameters > *:not(:last-child) {
-  min-width: 16%;
+  width: clamp(7rem, 12vw, 10rem);
 }
 
 /* TOGGLE COMPONENT/PARAMETER CONTROL */
@@ -113,20 +114,6 @@
   padding: 0.2rem 0.4rem;
 }
 
-.button-update,
-.button-login {
-  background-color: var(--light-grey);
-  border-radius: var(--common-border-radius);
-  transition: var(--main-transition);
-  border: 2px solid var(--dark-grey);
-}
-
-.button-update:hover,
-.button-login:hover {
-  background-color: var(--dark-grey);
-  color: var(--light-grey);
-}
-
 /* MOBILE BUTTON */
 
 .menu-icon {
@@ -151,8 +138,13 @@
   }
 
   .mobile-button {
-    display: inline-block;
+    display: flex;
     margin-left: var(--gap-medium);
+    padding: var(--pd-smallest);
+  }
+
+  .mobile-button > svg {
+    fill: var(--dark-grey);
   }
 
   .parameters {
@@ -197,5 +189,11 @@
 @media only screen and (max-width: 30rem) {
   .parameters {
     width: 60dvw;
+  }
+}
+
+@media only screen and (max-width: 25rem) {
+  .mobile-button {
+    margin-left: var(--gap-smallest);
   }
 }
